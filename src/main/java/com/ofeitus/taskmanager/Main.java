@@ -42,11 +42,17 @@ public class Main extends JFrame {
     private void updateTaskTable(TaskServiceImpl taskService) {
         Locale locale = Locale.getDefault();
         ResourceBundle rb = ResourceBundle.getBundle("lang/messages", locale);
+        if (employeeComboBox.getSelectedItem() == null) {
+            return;
+        }
 
         // Get tasks by selected employee
         List<Task> tasks = taskService.getTasksByEmployee(
                 (Employee) Objects.requireNonNull(employeeComboBox.getSelectedItem())
         );
+        if (tasks.isEmpty()) {
+            return;
+        }
         // Specify date pattern
         String pattern = "dd.MM.yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -92,11 +98,17 @@ public class Main extends JFrame {
     private void updatePlanTable(TaskServiceImpl taskService) {
         Locale locale = Locale.getDefault();
         ResourceBundle rb = ResourceBundle.getBundle("lang/messages", locale);
+        if (employeeComboBox.getSelectedItem() == null) {
+            return;
+        }
 
         // Get tasks by selected employee
         List<Task> tasks = taskService.getTasksByEmployee(
                 (Employee) Objects.requireNonNull(employeeComboBox.getSelectedItem())
         );
+        if (tasks.isEmpty()) {
+            return;
+        }
 
         // Count days in selected month
         int selectedMonth = ((Month) Objects.requireNonNull(monthComboBox.getSelectedItem())).ordinal();
@@ -187,9 +199,7 @@ public class Main extends JFrame {
     }
 
     public void createUIComponents() {
-        Locale locale = Locale.getDefault();
-        ResourceBundle rb = ResourceBundle.getBundle("lang/messages", locale);
-        employeeLabel = new JLabel(rb.getString("employee"));
+
     }
 
     public static void main(String[] args) {
