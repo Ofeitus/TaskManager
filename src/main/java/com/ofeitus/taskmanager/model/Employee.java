@@ -7,19 +7,16 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "employees")
+@Table
 public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "e_id", unique = true, nullable = false)
+    @Column(unique = true, nullable = false)
     private int id;
 
-    @Column(name = "e_name")
+    @Column
     private String name;
-
-    @OneToMany(mappedBy="employee")
-    private List<Task> tasks;
 
     @Override
     public String toString() {
